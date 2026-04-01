@@ -1,0 +1,30 @@
+\babel@toc {UKenglish}{}\relax 
+\contentsline {section}{\numberline {1}摘要}{2}{section.1}%
+\contentsline {section}{\numberline {2}国产CPU/GPU/NPU发展历史}{2}{section.2}%
+\contentsline {subsection}{\numberline {2.1}飞腾CPU：从SPARC到ARM的架构迁移}{2}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}华为鲲鹏与昇腾：制裁前后的两段历史}{2}{subsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1}制裁前（2004—2020）：积累阶段}{2}{subsubsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.2}制裁后（2020至今）：倒逼自主化}{3}{subsubsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.3}摩尔线程MUSA：通用GPU的国产探索}{3}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}总结：三条技术路径的共性}{3}{subsection.2.4}%
+\contentsline {section}{\numberline {3}代表性国产CPU/NPU微架构深度调研}{4}{section.3}%
+\contentsline {subsection}{\numberline {3.1}鲲鹏920：面向云计算的通用服务器CPU}{4}{subsection.3.1}%
+\contentsline {subsubsection}{\numberline {3.1.1}整体SoC架构}{4}{subsubsection.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.2}TaiShan V110单核微架构}{5}{subsubsection.3.1.2}%
+\contentsline {subsubsection}{\numberline {3.1.3}存储层级与片上互联}{5}{subsubsection.3.1.3}%
+\contentsline {subsection}{\numberline {3.2}昇腾910：面向AI训练的专用NPU}{5}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}整体架构}{5}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2}DaVinci Core：三维计算单元的设计逻辑}{6}{subsubsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.3}片上存储层级}{6}{subsubsection.3.2.3}%
+\contentsline {section}{\numberline {4}进阶调研：国内外最新处理器对比}{7}{section.4}%
+\contentsline {subsection}{\numberline {4.1}桌面CPU横向对比：以飞腾为基准}{7}{subsection.4.1}%
+\contentsline {subsubsection}{\numberline {4.1.1}国内外最新桌面CPU参数对比}{7}{subsubsection.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.2}桌面CPU差距分析与制约因素}{7}{subsubsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.2}GPU横向对比：以摩尔线程为基准}{7}{subsection.4.2}%
+\contentsline {subsubsection}{\numberline {4.2.1}最新国内外GPU参数对比}{7}{subsubsection.4.2.1}%
+\contentsline {subsubsection}{\numberline {4.2.2}GPU差距分析与制约因素}{8}{subsubsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.3}NPU：以华为昇腾910C为基准}{8}{subsection.4.3}%
+\contentsline {subsubsection}{\numberline {4.3.1}最新国际AI加速器（NPU）横向对比}{8}{subsubsection.4.3.1}%
+\contentsline {subsubsection}{\numberline {4.3.2}NPU差距分析}{8}{subsubsection.4.3.2}%
+\contentsline {section}{\numberline {5}展望：国产处理器的突围路径}{8}{section.5}%
+\contentsline {subsection}{\numberline {5.1}展望未来}{8}{subsection.5.1}%
