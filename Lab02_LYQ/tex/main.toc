@@ -1,0 +1,29 @@
+\babel@toc {UKenglish}{}\relax 
+\contentsline {section}{\numberline {1}引言}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}实验概述}{2}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}核心代码}{2}{subsection.1.2}%
+\contentsline {section}{\numberline {2}体系结构相关实验分析——cache 优化}{2}{section.2}%
+\contentsline {subsection}{\numberline {2.1}实验要求}{2}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}算法设计}{2}{subsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1}平凡算法}{2}{subsubsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.2}Cache 优化算法}{2}{subsubsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.3}实验过程}{3}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}性能分析}{3}{subsection.2.4}%
+\contentsline {subsubsection}{\numberline {2.4.1}不同规模下的执行时间及Cache优化效果}{3}{subsubsection.2.4.1}%
+\contentsline {subsubsection}{\numberline {2.4.2}进阶任务：不同优化级别下的执行性能}{4}{subsubsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.5}进阶任务：使用VTune进行Profiling}{4}{subsection.2.5}%
+\contentsline {section}{\numberline {3}体系结构相关实验分析————$n$ 个数求和}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}实验目的}{5}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}算法实现}{5}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}平凡算法}{5}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2}N路循环展开算法}{5}{subsubsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.3}递归算法}{6}{subsubsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.3}实验过程}{6}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}实验结果}{6}{subsection.3.4}%
+\contentsline {subsubsection}{\numberline {3.4.1}整数算法性能对比}{6}{subsubsection.3.4.1}%
+\contentsline {subsubsection}{\numberline {3.4.2}浮点精度探索}{6}{subsubsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.5}数据分析}{6}{subsection.3.5}%
+\contentsline {subsubsection}{\numberline {3.5.1}整数算法性能对比}{6}{subsubsection.3.5.1}%
+\contentsline {subsubsection}{\numberline {3.5.2}进阶任务：浮点精度探索}{8}{subsubsection.3.5.2}%
+\contentsline {subsection}{\numberline {3.6}进阶任务：使用VTune进行Profiling}{8}{subsection.3.6}%
+\contentsline {subsubsection}{\numberline {3.6.1}VTune 微架构分析}{8}{subsubsection.3.6.1}%
