@@ -11,6 +11,7 @@
 #include <omp.h>
 #include "hnswlib/hnswlib/hnswlib.h"
 #include "flat_scan.h"
+#include "simd_search.h"
 // 可以自行添加需要的头文件
 
 using namespace hnswlib;
@@ -94,7 +95,7 @@ int main(int argc, char *argv[])
 
         // 该文件已有代码中你只能修改该函数的调用方式
         // 可以任意修改函数名，函数参数或者改为调用成员函数，但是不能修改函数返回值。
-        auto res = flat_search(base, test_query + i*vecdim, base_number, vecdim, k);
+        auto res = simd_flat_search(base, test_query + i*vecdim, base_number, vecdim, k);
 
         struct timeval newVal;
         ret = gettimeofday(&newVal, NULL);
