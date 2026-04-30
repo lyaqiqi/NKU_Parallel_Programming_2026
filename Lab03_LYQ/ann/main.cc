@@ -12,6 +12,8 @@
 #include "hnswlib/hnswlib/hnswlib.h"
 #include "flat_scan.h"
 #include "simd_search.h"
+#include "sq_search.h"
+#include "pq_search.h"
 // 可以自行添加需要的头文件
 
 using namespace hnswlib;
@@ -86,48 +88,78 @@ int main(int argc, char *argv[])
     // 下面是一个构建hnsw索引的示例
     // build_index(base, base_number, vecdim);
 
-    
-    // 查询测试代码
-    for(int i = 0; i < test_number; ++i) {
-        const unsigned long Converter = 1000 * 1000;
-        struct timeval val;
-        int ret = gettimeofday(&val, NULL);
+    // PQ 索引：从 Python 预生成的码本文件加载（量化开销不计入查询延迟）
+    PQIndex pq_idx;
+    bool pq_ok = pq_idx.load("files/pq_codebook.bin", "files/pq_codes.bin",
+                              base, base_number, vecdim);
+    if (!pq_ok) {
+        std::cerr << "PQIndex load failed — run generate_pq.py first\n";
+        return 1;
+    }
 
-        // 该文件已有代码中你只能修改该函数的调用方式
-        // 可以任意修改函数名，函数参数或者改为调用成员函数，但是不能修改函数返回值。
-        auto res = simd_flat_search(base, test_query + i*vecdim, base_number, vecdim, k);
+    // p-sweep：1..50 逐个取，之后跳跃取
+    std::vector<size_t> p_list;
+    for (size_t p = 1; p <= 50; ++p) p_list.push_back(p);
+    {
+        const size_t extra[] = {75, 100, 150, 200, 300, 500, 750,
+                                 1000, 1500, 2000, 3000, 5000};
+        for (size_t p : extra) p_list.push_back(p);
+    }
 
-        struct timeval newVal;
-        ret = gettimeofday(&newVal, NULL);
-        int64_t diff = (newVal.tv_sec * Converter + newVal.tv_usec) - (val.tv_sec * Converter + val.tv_usec);
+    float last_recall = 0, last_latency_us = 0;
+    for (size_t pq_p : p_list) {
 
-        std::set<uint32_t> gtset;
-        for(int j = 0; j < k; ++j){
-            int t = test_gt[j + i*test_gt_d];
-            gtset.insert(t);
-        }
+        // 查询测试代码
+        for(int i = 0; i < (int)test_number; ++i) {
+            const unsigned long Converter = 1000 * 1000;
+            struct timeval val;
+            gettimeofday(&val, NULL);
 
-        size_t acc = 0;
-        while (res.size()) {   
-            int x = res.top().second;
-            if(gtset.find(x) != gtset.end()){
-                ++acc;
+            // 该文件已有代码中你只能修改该函数的调用方式
+            // 可以任意修改函数名，函数参数或者改为调用成员函数，但是不能修改函数返回值。
+            auto res = pq_idx.search(test_query + i*vecdim, k, pq_p);
+
+            struct timeval newVal;
+            gettimeofday(&newVal, NULL);
+            int64_t diff = (newVal.tv_sec * Converter + newVal.tv_usec)
+                         - (val.tv_sec   * Converter + val.tv_usec);
+
+            std::set<uint32_t> gtset;
+            for(int j = 0; j < (int)k; ++j){
+                int t = test_gt[j + i*test_gt_d];
+                gtset.insert(t);
             }
-            res.pop();
+
+            size_t acc = 0;
+            while (res.size()) {
+                int x = res.top().second;
+                if(gtset.find(x) != gtset.end()) ++acc;
+                res.pop();
+            }
+            results[i] = {(float)acc / k, diff};
         }
-        float recall = (float)acc/k;
 
-        results[i] = {recall, diff};
+        float avg_recall = 0, avg_latency_us = 0;
+        for(int i = 0; i < (int)test_number; ++i) {
+            avg_recall     += results[i].recall;
+            avg_latency_us += results[i].latency;
+        }
+        avg_recall     /= test_number;
+        avg_latency_us /= test_number;
+
+        // output: p=X latency=Yms recall=Z
+        std::cout << std::fixed << std::setprecision(3);
+        std::cout << "p=" << pq_p
+                  << " latency=" << avg_latency_us / 1000.0f << "ms"
+                  << " recall="  << avg_recall << "\n";
+        std::cout.flush();
+
+        last_recall     = avg_recall;
+        last_latency_us = avg_latency_us;
     }
 
-    float avg_recall = 0, avg_latency = 0;
-    for(int i = 0; i < test_number; ++i) {
-        avg_recall += results[i].recall;
-        avg_latency += results[i].latency;
-    }
-
-    // 浮点误差可能导致一些精确算法平均recall不是1
-    std::cout << "average recall: "<<avg_recall / test_number<<"\n";
-    std::cout << "average latency (us): "<<avg_latency / test_number<<"\n";
+    // 最后一个 p 值的结果保持标准格式
+    std::cout << "average recall: "       << last_recall     << "\n";
+    std::cout << "average latency (us): " << last_latency_us << "\n";
     return 0;
 }
