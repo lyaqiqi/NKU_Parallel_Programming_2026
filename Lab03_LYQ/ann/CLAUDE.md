@@ -200,12 +200,26 @@ Host s2313483
 
 ### 上传代码到集群
 
-在本地 `ann/` 目录下执行，将改动的头文件和 main.cc 同步到集群：
+本地 ann 路径：`E:\并行模板\Parallel\NKU_Parallel_Programming_2026\Lab03_LYQ\ann`
+
+**推荐：rsync 同步（只传有变化的文件，速度快，需 Git Bash 或 WSL）**
 
 ```bash
-scp -J s2313483@10.137.144.91:9001 \
-    main.cc simd_utils.h simd_search.h \
-    s2313483@192.168.90.141:~/ann/
+rsync -avz "E:/并行模板/Parallel/NKU_Parallel_Programming_2026/Lab03_LYQ/ann/" nankai-parallel:~/ann/
+```
+
+**备用：scp 全量上传（PowerShell / CMD 直接可用）**
+
+```powershell
+scp -r "E:\并行模板\Parallel\NKU_Parallel_Programming_2026\Lab03_LYQ\ann" nankai-parallel:~/
+```
+
+> `scp -r ann nankai-parallel:~/` 会将整个 ann 文件夹上传并覆盖服务器的 `~/ann`。
+
+**仅上传指定文件（只改了少数文件时，在 ann/ 目录下执行）**
+
+```powershell
+scp pq_search.h generate_pq.py nankai-parallel:~/ann/
 ```
 
 ### 集群提交测试（正式评测，必须用此方式）
